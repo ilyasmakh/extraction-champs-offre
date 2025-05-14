@@ -33,7 +33,7 @@ public class ChampsGestion {
     private String rappel;
 
 
-    public void extraireDepuisJson(JsonNode json) {
+    public void extraireGestionDepuisJson(JsonNode json) {
         ObjectMapper mapper = new ObjectMapper();
 
         // Si c'est un texte (chaîne JSON), on le reparse

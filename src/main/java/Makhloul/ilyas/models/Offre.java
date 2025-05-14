@@ -67,13 +67,25 @@ public class Offre {
     @Getter @Setter
     private ChampsGestion champsGestion = new ChampsGestion() ;
 
+    public void setChampsGestion() {
+        this.champsGestion.extraireGestionDepuisJson(gestion);
+    }
+
     @Getter
     @JsonProperty("donnees")
     private JsonNode donnees;
 
-    public void setChampsGestion() {
-        this.champsGestion.extraireDepuisJson(gestion);
+    @Getter @Setter
+    private ChampsDonnees champsDonnees = new ChampsDonnees() ;
+
+    public void setChampsDonnees() {
+        this.champsDonnees.extraireDonneesDepuisJson(donnees);
     }
+
+
+
+
+
 
     @JsonProperty("url_avis")
     private String url_avis ;
