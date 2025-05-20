@@ -79,6 +79,7 @@ public class ChampsDonnees {
         private String text;
     }
 
+    @ToString
     public static class Lot {
         @Getter
         @Setter
