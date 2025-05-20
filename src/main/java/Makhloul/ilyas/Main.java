@@ -20,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
 
         RestTemplate restTemplate = new RestTemplate();
+        ////
 
         // Créez le service
         OffreApiService offreApiService = new OffreApiService(restTemplate);

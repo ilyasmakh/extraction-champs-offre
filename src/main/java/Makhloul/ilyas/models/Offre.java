@@ -65,9 +65,10 @@ public class Offre {
     private JsonNode gestion;
 
     @Getter @Setter
-    private ChampsGestion champsGestion = new ChampsGestion() ;
+    private ChampsGestion champsGestion ;
 
     public void setChampsGestion() {
+        champsGestion = new ChampsGestion();
         this.champsGestion.extraireGestionDepuisJson(gestion);
     }
 
