@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 
 public class ChampsGestion {
 
@@ -32,11 +31,9 @@ public class ChampsGestion {
     private String genre ;
     private String rappel;
 
-
     public void extraireGestionDepuisJson(JsonNode json) {
         ObjectMapper mapper = new ObjectMapper();
 
-        // Si c'est un texte (chaîne JSON), on le reparse
         if (json.isTextual()) {
             try {
                 json = mapper.readTree(json.textValue());
