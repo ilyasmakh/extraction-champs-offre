@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@ToString
 public class Offre {
 
     @JsonProperty("idweb")
@@ -48,17 +50,16 @@ public class Offre {
     @JsonProperty("nomacheteur")
     private String nomAcheteur;
 
-    @JsonProperty("typemarche")
-    private String typeMarche;
+    @JsonProperty("type_marche")
+    private List<String> typeMarche;
 
-    @JsonProperty("typecontrat")
-    private String typeContrat;
 
-    @JsonProperty("typeavis")
-    private String typeAvis;
+    @JsonProperty("type_avis")
+    private List<String> typeAvis;
+
 
     @JsonProperty("annoncelie")
-    private String[] annonceLie;
+    private List<String> annonceLie;
 
     @Getter @Setter
     @JsonProperty("gestion")
@@ -67,14 +68,21 @@ public class Offre {
     @Getter @Setter
     private ChampsGestion champsGestion ;
 
+    @Getter
+    @JsonProperty("donnees")
+    private JsonNode donnees;
+
+
+    @JsonProperty("url_avis")
+    private String url_avis ;
+
+//***********************************************************************************************
+
     public void setChampsGestion() {
         champsGestion = new ChampsGestion();
         this.champsGestion.extraireGestionDepuisJson(gestion);
     }
 
-    @Getter
-    @JsonProperty("donnees")
-    private JsonNode donnees;
 
     @Getter @Setter
     private ChampsDonnees champsDonnees = new ChampsDonnees() ;
@@ -84,12 +92,6 @@ public class Offre {
     }
 
 
-
-
-
-
-    @JsonProperty("url_avis")
-    private String url_avis ;
 
 
     // --------- Section 1 - Identification de l'acheteur ---------------------------------
@@ -142,29 +144,7 @@ public class Offre {
     Boolean visiteObligatoir  ;
     String infosComp ;
 
-    @Override
-    public String toString() {
-        return "Offre{" +
-                "idweb='" + idweb + '\'' +
-                ", id='" + id + '\'' +
-                ", contractfolderid='" + contractfolderid + '\'' +
-                ", objet='" + objet + '\'' +
-                ", codeDepartement=" + codeDepartement +
-                ", famille='" + famille + '\'' +
-                ", etat='" + etat + '\'' +
-                ", dateParution=" + dateParution +
-                ", dateFinDiffusion=" + dateFinDiffusion +
-                ", dateLimitReponse=" + dateLimitReponse +
-                ", nomAcheteur='" + nomAcheteur + '\'' +
-                ", typeMarche='" + typeMarche + '\'' +
-                ", typeContrat='" + typeContrat + '\'' +
-                ", typeAvis='" + typeAvis + '\'' +
-                ", annonceLie=" + Arrays.toString(annonceLie) +
-                ", gestion=" + gestion +
-                ", donnees=" + donnees +
-                ", url_avis='" + url_avis + '\'' +
-                '}';
-    }
+
 
     public static boolean contientObjet(JsonNode node) {
         if (node.isObject()) {

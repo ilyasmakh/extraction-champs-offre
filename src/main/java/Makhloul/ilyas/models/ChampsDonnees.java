@@ -60,14 +60,8 @@ public class ChampsDonnees {
     private String renseignementsComplementaires;
 
     // === Classe Lot interne ===
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Value {
-        private String valeur;
-        private String devise;
-    }
 
+    @ToString
     public static class Valeur {
         @Getter
         @Setter
