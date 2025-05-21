@@ -168,25 +168,25 @@ public class ChampsDonnees {
         JsonNode procedure = json.get("PROCEDURE");
         if (procedure != null && procedure.isObject()) {
             JsonNode typeProcedure = procedure.get("TYPE_PROCEDURE");
-            if (typeProcedure.hasNonNull("OUVERT"))
+            if (typeProcedure != null && typeProcedure.hasNonNull("OUVERT"))
                 this.typeProcedure = typeProcedure.get("OUVERT").asText();
 
             JsonNode techAchat = procedure.get("TECH_ACHAT");
-            if (techAchat.hasNonNull("ACCORD_CADRE")) {
+            if (techAchat != null && techAchat.hasNonNull("ACCORD_CADRE")) {
                 this.techAchat = techAchat.get("ACCORD_CADRE").
                         asText();
             }
 
-            if (techAchat.hasNonNull("VARIANTES_NON"))
+            if (techAchat != null && techAchat.hasNonNull("VARIANTES_NON"))
                 this.variantesNon = techAchat.get("VARIANTES_NON").
                         asText();
 
-            if (techAchat.hasNonNull("CATEGORIE_ACHETEUR"))
+            if (techAchat != null && techAchat.hasNonNull("CATEGORIE_ACHETEUR"))
                 this.categorieAcheteur = techAchat.get("CATEGORIE_ACHETEUR").
                         asText();
 
             JsonNode criteresAttribution = procedure.get("CRITERES_ATTRIBUTION");
-            if (criteresAttribution.hasNonNull("CRITERES_LIBRE"))
+            if (criteresAttribution != null && criteresAttribution.hasNonNull("CRITERES_LIBRE"))
                 this.criteresAttribution = criteresAttribution.get("CRITERES_LIBRE").
                         asText();
 
@@ -235,6 +235,7 @@ public class ChampsDonnees {
 
         JsonNode conditionRelativeMarche = json.get("CONDITION_RELATIVE_MARCHE");
         if (conditionRelativeMarche != null && conditionRelativeMarche.isObject()) {
+            if (conditionRelativeMarche.hasNonNull("PARTICIPATION_ELECTRONIQUE_AUTORISEE"))
             this.participationElectroniqueAutorisee =
                     conditionRelativeMarche.get("PARTICIPATION_ELECTRONIQUE_AUTORISEE").
                             asText();

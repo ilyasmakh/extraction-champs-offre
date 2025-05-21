@@ -20,13 +20,10 @@ public class Main {
     public static void main(String[] args) {
 
         RestTemplate restTemplate = new RestTemplate();
-        ////
 
-        // Créez le service
         OffreApiService offreApiService = new OffreApiService(restTemplate);
 
-        // Récupérer les offres pour un idweb spécifique
-        List<Offre> offres = offreApiService.getOffreById("22_170271");
+        List<Offre> offres = offreApiService.getOffreById("23_170859");
         System.out.println("----------------L'offre -------------------------");
         System.out.println(offres.get(0));
 
