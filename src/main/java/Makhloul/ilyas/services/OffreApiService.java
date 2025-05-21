@@ -44,9 +44,11 @@ public class OffreApiService {
 
     public List<Offre> getOffresByYear(String year) {
         try {
-            String conditionYear = "dateparution%3E%3D%" + year + "-01-01%27";
+            String conditionYear = "dateparution>='" + year + "-01-01'";
+            String conditionEncoded = URLEncoder.encode(conditionYear, StandardCharsets.UTF_8);
             String url = "https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records"
                     + "?where=" + conditionYear + "&limit=100";
+
 
             System.out.println("URL utilisée : " + url);
 

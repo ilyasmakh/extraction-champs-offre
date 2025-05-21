@@ -1,5 +1,6 @@
 package Makhloul.ilyas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,6 +75,7 @@ public class ChampsDonnees {
     }
 
     @ToString
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Lot {
         @Getter
         @Setter
@@ -87,6 +89,12 @@ public class ChampsDonnees {
         @Setter
         @JsonProperty("VALEUR")
         private Valeur valeur;
+        /*
+        *   @Getter
+        @Setter
+        @JsonProperty("CPV")
+        private String CPV;*/
+
     }
 
     // === Méthode d'extraction (à compléter) ===
@@ -130,10 +138,12 @@ public class ChampsDonnees {
             if (objet.hasNonNull("OBJET_COMPLET"))
                 this.objetComplet = objet.get("OBJET_COMPLET").asText();
 
-            JsonNode cpv = objet.get("CPV");
-            if (cpv != null && cpv.isObject()) {
-                if (cpv.hasNonNull("PRINCIPAL"))
-                    this.cpvPrincipal = cpv.get("PRINCIPAL").asText();
+            if (objet.hasNonNull("CPV")) {
+                JsonNode cpv = objet.get("CPV");
+                if (cpv != null && cpv.isObject()) {
+                    if (cpv.hasNonNull("PRINCIPAL"))
+                        this.cpvPrincipal = cpv.get("PRINCIPAL").asText();
+                }
             }
             JsonNode lieuExecLiv = objet.get("LIEU_EXEC_LIVR");
             if (lieuExecLiv != null && lieuExecLiv.isObject()) {
