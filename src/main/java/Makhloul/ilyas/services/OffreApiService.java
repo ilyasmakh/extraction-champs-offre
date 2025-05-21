@@ -42,7 +42,7 @@ public class OffreApiService {
         return Collections.emptyList();
     }
 
-    public List<Offre> getOffreByYear(String year) {
+    public List<Offre> getOffresByYear(String year) {
         try {
             String conditionYear = "dateparution%3E%3D%" + year + "-01-01%27";
             String url = "https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records"

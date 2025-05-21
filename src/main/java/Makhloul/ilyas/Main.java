@@ -23,7 +23,7 @@ public class Main {
 
         OffreApiService offreApiService = new OffreApiService(restTemplate);
 
-        List<Offre> offres = offreApiService.getOffreByYear("2024");
+        List<Offre> offres = offreApiService.getOffresByYear("2024");
         for (Offre offre : offres) {
             offre.setChampsDonnees();
             offre.setChampsGestion();
