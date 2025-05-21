@@ -236,9 +236,9 @@ public class ChampsDonnees {
         JsonNode conditionRelativeMarche = json.get("CONDITION_RELATIVE_MARCHE");
         if (conditionRelativeMarche != null && conditionRelativeMarche.isObject()) {
             if (conditionRelativeMarche.hasNonNull("PARTICIPATION_ELECTRONIQUE_AUTORISEE"))
-            this.participationElectroniqueAutorisee =
-                    conditionRelativeMarche.get("PARTICIPATION_ELECTRONIQUE_AUTORISEE").
-                            asText();
+                this.participationElectroniqueAutorisee =
+                        conditionRelativeMarche.get("PARTICIPATION_ELECTRONIQUE_AUTORISEE").
+                                asText();
         }
     }
 }

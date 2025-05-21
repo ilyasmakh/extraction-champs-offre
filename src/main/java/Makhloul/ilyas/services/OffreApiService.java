@@ -1,7 +1,6 @@
 package Makhloul.ilyas.services;
 
 
-
 import Makhloul.ilyas.models.Offre;
 import Makhloul.ilyas.models.OffreFilter;
 import Makhloul.ilyas.models.OffreResponse;
@@ -20,14 +19,14 @@ import java.util.List;
 public class OffreApiService {
     private final RestTemplate restTemplate;
 
-    public OffreApiService(RestTemplate restTemplate ) {
+    public OffreApiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     public List<Offre> getOffreById(String id) {
         try {
             String url = "https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records"
-                    + "?where=id=\""+id+"\"";
+                    + "?where=id=\"" + id + "\"";
 
             System.out.println("URL utilisée : " + url);
 
@@ -40,10 +39,28 @@ public class OffreApiService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return Collections.emptyList();
     }
 
+    public List<Offre> getOffreByYear(String year) {
+        try {
+            String conditionYear = "dateparution%3E%3D%" + year + "-01-01%27";
+            String url = "https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records"
+                    + "?where=" + conditionYear + "&limit=100";
+
+            System.out.println("URL utilisée : " + url);
+
+            OffreResponse response = restTemplate.getForObject(url, OffreResponse.class);
+
+            if (response != null && response.getResults() != null) {
+                return response.getResults();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
 
     public List<Offre> getOffreByFilters(OffreFilter filter) {
         try {
@@ -56,17 +73,17 @@ public class OffreApiService {
 
             // Champs tableaux → utiliser array_contains
             if (filter.getTypeMarche() != null && !filter.getTypeMarche().isEmpty()) {
-                conditions.add("type_marche LIKE \"%"+ filter.getTypeMarche() + "%\"");
+                conditions.add("type_marche LIKE \"%" + filter.getTypeMarche() + "%\"");
             }
-            if (filter.getDepartement()!= null && !filter.getDepartement().isEmpty()) {
-                conditions.add("code_departement LIKE \"%"+ filter.getDepartement() + "%\"");
+            if (filter.getDepartement() != null && !filter.getDepartement().isEmpty()) {
+                conditions.add("code_departement LIKE \"%" + filter.getDepartement() + "%\"");
             }
-            if (filter.getTypeAvis() != null && !filter.getTypeAvis() .isEmpty()) {
-                conditions.add("type_avis LIKE \"%"+ filter.getTypeAvis() + "%\"");
+            if (filter.getTypeAvis() != null && !filter.getTypeAvis().isEmpty()) {
+                conditions.add("type_avis LIKE \"%" + filter.getTypeAvis() + "%\"");
             }
 
-            if (filter.getFamille() != null && !filter.getFamille() .isEmpty()) {
-                conditions.add("famille=\"" + filter.getFamille()  + "\"");
+            if (filter.getFamille() != null && !filter.getFamille().isEmpty()) {
+                conditions.add("famille=\"" + filter.getFamille() + "\"");
 
             }
 
@@ -74,8 +91,8 @@ public class OffreApiService {
                 conditions.add("etat=\"" + filter.getEtat() + "\"");
             }
 
-            if (filter.getAcheteur() != null && !filter.getAcheteur() .isEmpty()) {
-                conditions.add("nomacheteur=\"" + filter.getAcheteur()  + "\"");
+            if (filter.getAcheteur() != null && !filter.getAcheteur().isEmpty()) {
+                conditions.add("nomacheteur=\"" + filter.getAcheteur() + "\"");
             }
 
             // Format date yyyy-MM-dd
@@ -85,9 +102,9 @@ public class OffreApiService {
                 conditions.add("datefindiffusion >= \"" + sdf.format(filter.getDateFinDiffusion()) + "\"");
             }
             if (filter.getDateLimiteReponse() != null) {
-                conditions.add("datelimitereponse >= \"" + sdf.format(filter.getDateLimiteReponse() ) + "\"");
+                conditions.add("datelimitereponse >= \"" + sdf.format(filter.getDateLimiteReponse()) + "\"");
             }
-            if (filter.getDateParution()!= null) {
+            if (filter.getDateParution() != null) {
                 conditions.add("dateparution >= \"" + sdf.format(filter.getDateParution()) + "\"");
             }
 

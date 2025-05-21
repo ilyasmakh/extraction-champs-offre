@@ -8,9 +8,9 @@ public class OffreResponse {
 
     private int total_count;
 
-
     @JsonProperty("results")
     private List<Offre> results;
+
 
     public int getTotal_count() {
         return total_count;

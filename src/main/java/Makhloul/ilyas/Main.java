@@ -23,12 +23,16 @@ public class Main {
 
         OffreApiService offreApiService = new OffreApiService(restTemplate);
 
-        List<Offre> offres = offreApiService.getOffreById("23_170859");
+        List<Offre> offres = offreApiService.getOffreByYear("2024");
+        for (Offre offre : offres) {
+            offre.setChampsDonnees();
+            offre.setChampsGestion();
+        }
         System.out.println("----------------L'offre -------------------------");
         System.out.println(offres.get(0));
 
-        offres.get(0).setChampsGestion();
-        offres.get(0).setChampsDonnees();
+        // offres.get(0).setChampsGestion();
+        // offres.get(0).setChampsDonnees();
         System.out.println("---------------- CHAMPS GESTION ------------------------");
         System.out.println(offres.get(0).getChampsGestion().toString());
         System.out.println("---------------- CHAMPS DONNEES ------------------------");
